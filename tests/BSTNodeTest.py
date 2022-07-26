@@ -101,6 +101,21 @@ class MyTestCase(unittest.TestCase):
         test_bst_find.ToLeft = True
         self.assertEqual(self.bst_find_to_str(bst_find), self.bst_find_to_str(test_bst_find))  # add assertion here
 
+    def test_find(self):
+        root = BSTNode(5, 5, None)
+        node2 = BSTNode(3, 3, root)
+        node3 = BSTNode(7, 7, root)
+        root.LeftChild = node2
+        root.RightChild = node3
+        tree = BST(root)
+        bst_find = tree.FindNodeByKey(1)
+        self.assertEqual('3,False,True', self.bst_find_to_str(bst_find))  # add assertion here
+
+    def test_find(self):
+        tree = BST(None)
+        bst_find = tree.FindNodeByKey(1)
+        self.assertEqual('None,False,False', self.bst_find_to_str(bst_find))  # add assertion here
+
     def test_find_right(self):
         root = BSTNode(5, 5, None)
         node2 = BSTNode(3, 3, root)
