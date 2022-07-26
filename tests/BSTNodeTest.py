@@ -124,12 +124,6 @@ class MyTestCase(unittest.TestCase):
         node = bst_find.Node.NodeKey if bst_find.Node else 'None'
         return str(node) + ',' + str(bst_find.NodeHasKey) + ',' + str(bst_find.ToLeft)
 
-
-    def test_find_no_root(self):
-        tree = BST(None)
-        bst_find = tree.FindNodeByKey(1)
-        self.assertEqual('None,False,False', self.bst_find_to_str(bst_find))  # add assertion here
-
     def test_find_right(self):
         root = BSTNode(5, 5, None)
         node2 = BSTNode(3, 3, root)
@@ -286,7 +280,7 @@ class MyTestCase(unittest.TestCase):
 
     def get_string_for_tree(self, tree):
         string = ''
-        all_nodes = tree.GetAllNodes()
+        all_nodes = tree.get_all_nodes()
         for node in all_nodes:
             parent_val = str(node.Parent.NodeKey) if node.Parent else 'None'
             left_val = str(node.LeftChild.NodeKey) if node.LeftChild else 'None'

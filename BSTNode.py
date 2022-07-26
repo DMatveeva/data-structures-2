@@ -27,12 +27,16 @@ class BST:
         return self.find_node_by_key_recursive(key, self.Root, None)
 
     def find_node_by_key_recursive(self, key, node, parent):
-        if not node:
+        if not node and parent.NodeKey > key:
             bst_find = BSTFind()
             bst_find.Node = parent
             bst_find.NodeHasKey = False
-            if parent.NodeKey > key:
-                bst_find.ToLeft = True
+            bst_find.ToLeft = True
+            return bst_find
+        if not node and parent.NodeKey < key:
+            bst_find = BSTFind()
+            bst_find.Node = parent
+            bst_find.NodeHasKey = False
             return bst_find
         if node.NodeKey == key:
             bst_find = BSTFind()
@@ -107,14 +111,17 @@ class BST:
     def update_all_dependencies(self, node_to_delete, left_child, right_child, new_node):
         left_child.Parent = new_node
         new_node.LeftChild = left_child
-        if new_node != node_to_delete.RightChild:
-            # When min node has right child, we set this child at the place of min node.
-            if new_node.RightChild:
-                self.update_ex_place_of_new_child(new_node)
-            else:
-                new_node.Parent.LeftChild = None
-            new_node.RightChild = right_child
-            right_child.Parent = new_node
+
+        if new_node == node_to_delete.RightChild:
+            return
+
+        # When min node has right child, we set this child at the place of min node.
+        if new_node.RightChild:
+            self.update_ex_place_of_new_child(new_node)
+        else:
+            new_node.Parent.LeftChild = None
+        new_node.RightChild = right_child
+        right_child.Parent = new_node
 
     def calc_new_child(self, left_child, right_child):
         if not left_child and not right_child:
@@ -127,18 +134,18 @@ class BST:
             min_node = self.FinMinMax(right_child, False).Node
             return min_node
 
-    def update_ex_place_of_new_child(self, min_node):
+    @staticmethod
+    def update_ex_place_of_new_child(min_node):
         right_child_of_min_node = min_node.RightChild
         if right_child_of_min_node:
             min_node_parent = min_node.Parent
             min_node_parent.LeftChild = right_child_of_min_node
 
     def Count(self):
-        count = len(self.GetAllNodes())
+        count = len(self.get_all_nodes())
         return count
 
-
-    def GetAllNodes(self):
+    def get_all_nodes(self):
         all_nodes = []
         self.collect_children_nodes(self.Root, all_nodes)
         return all_nodes
