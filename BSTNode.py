@@ -23,7 +23,7 @@ class BST:
 
     def FindNodeByKey(self, key):
         if not self.Root:
-            return BSTFind()
+            return None
         return self.find_node_by_key_recursive(key, self.Root, None)
 
     def find_node_by_key_recursive(self, key, node, parent):
