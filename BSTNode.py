@@ -12,7 +12,6 @@ class BSTFind:
 
     def __init__(self):
         self.Node = None
-
         self.NodeHasKey = False
         self.ToLeft = False
 
@@ -82,13 +81,17 @@ class BST:
         left_child = node_to_delete.LeftChild
         right_child = node_to_delete.RightChild
         parent = node_to_delete.Parent
-        is_left_child = node_to_delete.NodeKey < parent.NodeKey
         new_node = self.calc_new_child(left_child, right_child)
         if left_child and right_child:
             self.update_all_dependencies(node_to_delete, left_child, right_child, new_node)
-
         if new_node:
             new_node.Parent = parent
+
+        if not parent:
+            self.Root = new_node
+            return True
+
+        is_left_child = node_to_delete.NodeKey < parent.NodeKey
         if is_left_child:
             parent.LeftChild = new_node
         else:
@@ -96,14 +99,16 @@ class BST:
         return True
 
     def update_all_dependencies(self, node_to_delete, left_child, right_child, new_node):
-        is_new_node_child_of_node_to_delete = new_node == node_to_delete.RightChild
         left_child.Parent = new_node
         new_node.LeftChild = left_child
-        if not is_new_node_child_of_node_to_delete:
+        if new_node != node_to_delete.RightChild:
             # When min node has right child, we set this child at the place of min node.
-            self.update_ex_place_of_new_child(new_node)
+            if new_node.RightChild:
+                self.update_ex_place_of_new_child(new_node)
+            else:
+                new_node.Parent.LeftChild = None
             new_node.RightChild = right_child
-            right_child.parent = new_node
+            right_child.Parent = new_node
 
     def calc_new_child(self, left_child, right_child):
         if not left_child and not right_child:

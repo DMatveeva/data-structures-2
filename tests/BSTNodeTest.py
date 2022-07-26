@@ -5,19 +5,19 @@ from BSTNode import BSTNode, BST, BSTFind
 
 class MyTestCase(unittest.TestCase):
 
-    # def delete_by_key_with_2_children(self):
-    #     root = BSTNode(5, 5, None)
-    #     tree = BST(root)
-    #     tree.AddKeyValue(7, 7)
-    #     tree.AddKeyValue(6, 6)
-    #     tree.AddKeyValue(9, 9)
-    #     tree.AddKeyValue(10, 10)
-    #     is_deleted = tree.DeleteNodeByKey(7)
-    #     expected_tree = '[5,5,None,None,9][6,6,9,None,None][9,9,5,6,10][10,10,9,None,None]'
-    #     self.assertEqual(True, is_deleted)
-    #     self.assertEqual(expected_tree, self.get_string_for_tree(tree))
+    def test_delete_by_key_root(self):
+        root = BSTNode(5, 5, None)
+        tree = BST(root)
+        tree.AddKeyValue(7, 7)
+        tree.AddKeyValue(6, 6)
+        tree.AddKeyValue(9, 9)
+        tree.AddKeyValue(10, 10)
+        is_deleted = tree.DeleteNodeByKey(5)
+        expected_tree = '[7,7,None,6,9][6,6,7,None,None][9,9,7,None,10][10,10,9,None,None]'
+        self.assertEqual(True, is_deleted)
+        self.assertEqual(expected_tree, self.get_string_for_tree(tree))
 
-    def test_find_equal(self):
+    def test_delete_by_key_with_2_children(self):
         root = BSTNode(5, 5, None)
         tree = BST(root)
         tree.AddKeyValue(7, 7)
@@ -28,6 +28,19 @@ class MyTestCase(unittest.TestCase):
         expected_tree = '[5,5,None,None,9][9,9,5,6,10][6,6,9,None,None][10,10,9,None,None]'
         self.assertEqual(True, is_deleted)
         self.assertEqual(expected_tree, self.get_string_for_tree(tree))
+
+    def test_find_equal(self):
+        root = BSTNode(5, 5, None)
+        node2 = BSTNode(3, 3, root)
+        node3 = BSTNode(7, 7, root)
+        root.LeftChild = node2
+        root.RightChild = node3
+        tree = BST(root)
+        bst_find = tree.FindNodeByKey(3)
+        test_bst_find = BSTFind()
+        test_bst_find.Node = node2
+        test_bst_find.NodeHasKey = True
+        self.assertEqual(self.bst_find_to_str(bst_find), self.bst_find_to_str(test_bst_find))
 
 
     def bst_find_to_str(self, bst_find):
