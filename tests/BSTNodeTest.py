@@ -120,7 +120,8 @@ class MyTestCase(unittest.TestCase):
         bst_find = tree.FindNodeByKey(10)
         self.assertEqual('7,False,False', self.bst_find_to_str(bst_find))
 
-    def bst_find_to_str(self, bst_find):
+    @staticmethod
+    def bst_find_to_str(bst_find):
         node = bst_find.Node.NodeKey if bst_find.Node else 'None'
         return str(node) + ',' + str(bst_find.NodeHasKey) + ',' + str(bst_find.ToLeft)
 
@@ -253,7 +254,6 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(True, is_deleted)
         self.assertEqual(expected_tree, self.get_string_for_tree(tree))
 
-
     def test_delete_by_key_with_2_children_no_update(self):
         root = BSTNode(5, 5, None)
         tree = BST(root)
@@ -276,9 +276,8 @@ class MyTestCase(unittest.TestCase):
         expected_tree = '[5,5,None,1,None][1,1,5,None,None]'
         self.assertEqual(expected_tree, self.get_string_for_tree(tree))
 
-
-
-    def get_string_for_tree(self, tree):
+    @staticmethod
+    def get_string_for_tree(tree):
         string = ''
         all_nodes = tree.get_all_nodes()
         for node in all_nodes:
@@ -289,7 +288,8 @@ class MyTestCase(unittest.TestCase):
                       left_val + ',' + right_val + ']'
         return string
 
-    def get_string_for_bst_find(self, bst_find):
+    @staticmethod
+    def get_string_for_bst_find(bst_find):
         node_value = str(bst_find.Node.NodeKey) if bst_find.Node else 'None'
         return node_value + ',' + str(bst_find.NodeHasKey) + ',' + str(bst_find.ToLeft)
 
