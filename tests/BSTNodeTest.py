@@ -5,6 +5,12 @@ from BSTNode import BSTNode, BST, BSTFind
 
 class MyTestCase(unittest.TestCase):
 
+    def test_add_root(self):
+        tree = BST(None)
+        tree.AddKeyValue(1, 1)
+        expected_tree = '[1,1,None,None,None]'
+        self.assertEqual(expected_tree, self.get_string_for_tree(tree))
+
     def test_delete_by_key_root(self):
         root = BSTNode(5, 5, None)
         tree = BST(root)

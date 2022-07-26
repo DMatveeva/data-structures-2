@@ -43,6 +43,8 @@ class BST:
             return self.find_node_by_key_recursive(key, node.RightChild, node)
 
     def AddKeyValue(self, key, val):
+        if self.Root is None:
+            self.Root = BSTNode(key, val, None)
         bst_find = self.FindNodeByKey(key)
         if bst_find.NodeHasKey:
             return False
