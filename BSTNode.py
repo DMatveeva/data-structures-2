@@ -1,11 +1,11 @@
 class BSTNode:
 
     def __init__(self, key, val, parent):
-        self.NodeKey = key  # ключ узла
-        self.NodeValue = val  # значение в узле
-        self.Parent = parent  # родитель или None для корня
-        self.LeftChild = None  # левый потомок
-        self.RightChild = None  # правый потомок
+        self.NodeKey = key
+        self.NodeValue = val
+        self.Parent = parent
+        self.LeftChild = None
+        self.RightChild = None
 
 
 class BSTFind:
@@ -45,14 +45,16 @@ class BST:
     def AddKeyValue(self, key, val):
         if self.Root is None:
             self.Root = BSTNode(key, val, None)
+            return True
         bst_find = self.FindNodeByKey(key)
         if bst_find.NodeHasKey:
             return False
-        new_node = BSTNode(key, val, bst_find.Node)
+        parent = bst_find.Node
+        new_node = BSTNode(key, val, parent)
         if bst_find.ToLeft:
-            bst_find.Node.LeftChild = new_node
+            parent.LeftChild = new_node
         else:
-            bst_find.Node.RightChild = new_node
+            parent.RightChild = new_node
         return True
 
     def FinMinMax(self, FromNode, FindMax):

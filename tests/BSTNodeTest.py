@@ -5,10 +5,44 @@ from BSTNode import BSTNode, BST, BSTFind
 
 class MyTestCase(unittest.TestCase):
 
-    def test_add_root(self):
+    def test_add_to_left_2(self):
+        root = BSTNode(5, 5, None)
+        node2 = BSTNode(3, 3, root)
+        node3 = BSTNode(7, 7, root)
+        root.LeftChild = node2
+        root.RightChild = node3
+        tree = BST(root)
+        is_added = tree.AddKeyValue(1, 1)
+        new_tree = '[5,5,None,3,7][3,3,5,1,None][1,1,3,None,None][7,7,5,None,None]'
+        self.assertEqual(is_added, True)  # add assertion here
+        self.assertEqual(self.get_string_for_tree(tree), new_tree)  # add assertion here
+
+    def test_add_3(self):
         tree = BST(None)
         tree.AddKeyValue(1, 1)
         expected_tree = '[1,1,None,None,None]'
+        self.assertEqual(expected_tree, self.get_string_for_tree(tree))
+        tree.AddKeyValue(4, 4)
+        expected_tree = '[1,1,None,None,4][4,4,1,None,None]'
+        self.assertEqual(expected_tree, self.get_string_for_tree(tree))
+        tree.AddKeyValue(-1, -1)
+        expected_tree = '[1,1,None,-1,4][-1,-1,1,None,None][4,4,1,None,None]'
+        self.assertEqual(expected_tree, self.get_string_for_tree(tree))
+
+        tree.AddKeyValue(10, 10)
+        expected_tree = '[1,1,None,-1,4][-1,-1,1,None,None][4,4,1,None,10][10,10,4,None,None]'
+        self.assertEqual(expected_tree, self.get_string_for_tree(tree))
+
+        tree.AddKeyValue(100, 3)
+        expected_tree = '[1,1,None,-1,4][-1,-1,1,None,None][4,4,1,None,10][10,10,4,None,100][100,3,10,None,None]'
+        self.assertEqual(expected_tree, self.get_string_for_tree(tree))
+
+        tree.AddKeyValue(100, 8)
+        expected_tree = '[1,1,None,-1,4][-1,-1,1,None,None][4,4,1,None,10][10,10,4,None,100][100,3,10,None,None]'
+        self.assertEqual(expected_tree, self.get_string_for_tree(tree))
+
+        tree.AddKeyValue(7, 8)
+        expected_tree = '[1,1,None,-1,4][-1,-1,1,None,None][4,4,1,None,10][10,10,4,7,100][7,8,10,None,None][100,3,10,None,None]'
         self.assertEqual(expected_tree, self.get_string_for_tree(tree))
 
     def test_delete_by_key_root(self):
