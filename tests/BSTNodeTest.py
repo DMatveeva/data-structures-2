@@ -82,11 +82,6 @@ class MyTestCase(unittest.TestCase):
         test_bst_find.NodeHasKey = True
         self.assertEqual(self.bst_find_to_str(bst_find), self.bst_find_to_str(test_bst_find))
 
-
-    def bst_find_to_str(self, bst_find):
-        node = bst_find.Node.NodeKey if bst_find.Node else 'None'
-        return str(node) + ',' + str(bst_find.NodeHasKey) + ',' + str(bst_find.ToLeft)
-
     def test_find_left(self):
         root = BSTNode(5, 5, None)
         node2 = BSTNode(3, 3, root)
@@ -102,11 +97,33 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(self.bst_find_to_str(bst_find), self.bst_find_to_str(test_bst_find))  # add assertion here
 
     def test_find(self):
-        root = BSTNode(5, 5, None)
-        tree = BST(root)
-        tree.AddKeyValue(1, 1)
+        tree = BST(None)
         bst_find = tree.FindNodeByKey(0)
-        self.assertEqual('1,False,True', self.bst_find_to_str(bst_find))  # add assertion here
+        self.assertEqual(None, bst_find)  # add assertion here
+
+        root = BSTNode(5, 5, None)
+        node2 = BSTNode(3, 3, root)
+        node3 = BSTNode(7, 7, root)
+        root.LeftChild = node2
+        root.RightChild = node3
+        tree = BST(root)
+
+        bst_find = tree.FindNodeByKey(5)
+        self.assertEqual('5,True,False', self.bst_find_to_str(bst_find))
+
+        bst_find = tree.FindNodeByKey(1)
+        self.assertEqual('3,False,True', self.bst_find_to_str(bst_find))
+
+        bst_find = tree.FindNodeByKey(6)
+        self.assertEqual('7,False,True', self.bst_find_to_str(bst_find))
+
+        bst_find = tree.FindNodeByKey(10)
+        self.assertEqual('7,False,False', self.bst_find_to_str(bst_find))
+
+    def bst_find_to_str(self, bst_find):
+        node = bst_find.Node.NodeKey if bst_find.Node else 'None'
+        return str(node) + ',' + str(bst_find.NodeHasKey) + ',' + str(bst_find.ToLeft)
+
 
     def test_find_no_root(self):
         tree = BST(None)
