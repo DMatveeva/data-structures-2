@@ -6,7 +6,7 @@ from BSTNode import BSTNode, BST, BSTFind
 class MyTestCase(unittest.TestCase):
 
     def test_find_100(self):
-        root = BSTNode(8, 8, None)
+        root = BSTNode(8, 0, None)
         tree = BST(root)
         tree.AddKeyValue(4, 4)
         tree.AddKeyValue(12, 12)
@@ -23,7 +23,7 @@ class MyTestCase(unittest.TestCase):
         tree.AddKeyValue(13, 13)
         tree.AddKeyValue(15, 15)
 
-        expected_bst = '[8,8,None,4,12][4,4,8,2,6][2,2,4,1,3][1,1,2,None,None]' \
+        expected_bst = '[8,0,None,4,12][4,4,8,2,6][2,2,4,1,3][1,1,2,None,None]' \
                        '[3,3,2,None,None][6,6,4,5,7][5,5,6,None,None][7,7,6,None,None]' \
                        '[12,12,8,10,14][10,10,12,9,11][9,9,10,None,None][11,11,10,None,None]' \
                        '[14,14,12,13,15][13,13,14,None,None][15,15,14,None,None]'

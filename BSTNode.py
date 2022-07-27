@@ -43,9 +43,9 @@ class BST:
             bst_find.Node = node
             bst_find.NodeHasKey = True
             return bst_find
-        if node.NodeValue > key:
+        if node.NodeKey > key:
             return self.find_node_by_key_recursive(key, node.LeftChild, node)
-        if node.NodeValue < key:
+        if node.NodeKey < key:
             return self.find_node_by_key_recursive(key, node.RightChild, node)
 
     def AddKeyValue(self, key, val):
