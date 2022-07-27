@@ -5,6 +5,42 @@ from BSTNode import BSTNode, BST, BSTFind
 
 class MyTestCase(unittest.TestCase):
 
+    def test_find_100(self):
+        root = BSTNode(8, 8, None)
+        tree = BST(root)
+        tree.AddKeyValue(4, 4)
+        tree.AddKeyValue(12, 12)
+        tree.AddKeyValue(2, 2)
+        tree.AddKeyValue(6, 6)
+        tree.AddKeyValue(10, 10)
+        tree.AddKeyValue(14, 14)
+        tree.AddKeyValue(1, 1)
+        tree.AddKeyValue(3, 3)
+        tree.AddKeyValue(5, 5)
+        tree.AddKeyValue(7, 7)
+        tree.AddKeyValue(9, 9)
+        tree.AddKeyValue(11, 11)
+        tree.AddKeyValue(13, 13)
+        tree.AddKeyValue(15, 15)
+
+        expected_bst = '[8,8,None,4,12][4,4,8,2,6][2,2,4,1,3][1,1,2,None,None]' \
+                       '[3,3,2,None,None][6,6,4,5,7][5,5,6,None,None][7,7,6,None,None]' \
+                       '[12,12,8,10,14][10,10,12,9,11][9,9,10,None,None][11,11,10,None,None]' \
+                       '[14,14,12,13,15][13,13,14,None,None][15,15,14,None,None]'
+
+        self.assertEqual(expected_bst, self.get_string_for_tree(tree))
+
+        expected_bst_find = '15,False,False'
+        bst_find = tree.FindNodeByKey(100)
+        self.assertEqual(expected_bst_find, self.get_string_for_bst_find(bst_find))
+
+        tree.AddKeyValue(100, 100)
+        expected_bst = '[8,8,None,4,12][4,4,8,2,6][2,2,4,1,3][1,1,2,None,None]' \
+                       '[3,3,2,None,None][6,6,4,5,7][5,5,6,None,None][7,7,6,None,None]' \
+                       '[12,12,8,10,14][10,10,12,9,11][9,9,10,None,None][11,11,10,None,None]' \
+                       '[14,14,12,13,15][13,13,14,None,None][15,15,14,None,100][100,100,15,None,None]'
+        self.assertEqual(expected_bst, self.get_string_for_tree(tree))
+
     def test_add_to_left_2(self):
         root = BSTNode(5, 5, None)
         node2 = BSTNode(3, 3, root)
