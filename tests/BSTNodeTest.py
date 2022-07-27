@@ -34,9 +34,31 @@ class MyTestCase(unittest.TestCase):
         bst_find = tree.FindNodeByKey(100)
         self.assertEqual(expected_bst_find, self.get_string_for_bst_find(bst_find))
 
+        self.assertEqual(False, bst_find.NodeHasKey)
+        self.assertEqual(False, bst_find.ToLeft)
+        self.assertEqual(tree.FindNodeByKey(15).Node, bst_find.Node)
+        self.assertEqual(15, bst_find.Node.NodeKey)
+        self.assertEqual(tree.FindNodeByKey(14).Node, bst_find.Node.Parent)
+        self.assertEqual(14, bst_find.Node.Parent.NodeKey)
+
         expected_bst_find = '1,False,True'
         bst_find = tree.FindNodeByKey(0)
         self.assertEqual(expected_bst_find, self.get_string_for_bst_find(bst_find))
+
+        self.assertEqual(False, bst_find.NodeHasKey)
+        self.assertEqual(True, bst_find.ToLeft)
+        self.assertEqual(tree.FindNodeByKey(1).Node, bst_find.Node)
+        self.assertEqual(1, bst_find.Node.NodeKey)
+        self.assertEqual(tree.FindNodeByKey(2).Node, bst_find.Node.Parent)
+        self.assertEqual(2, bst_find.Node.Parent.NodeKey)
+
+    def bst_find_to_str_full(self, bst_find):
+        node = bst_find.Node
+        if node:
+            node_str = '[' + str(node.NodeKey) + ',' + str(node.Parent.NodeKey) + ']'
+        else:
+            node_str = 'None'
+        return node_str + ',' + str(bst_find.NodeHasKey) + ',' + str(bst_find.ToLeft)
 
 
 
