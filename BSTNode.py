@@ -68,10 +68,7 @@ class BST:
             node = self.find_max_recursive(FromNode, FromNode.Parent)
         else:
             node = self.find_min_recursive(FromNode, FromNode.Parent)
-        bst_find = BSTFind()
-        bst_find.Node = node
-        bst_find.NodeHasKey = True
-        return bst_find
+        return node
 
     def find_max_recursive(self, node, parent):
         if not node:
@@ -131,7 +128,7 @@ class BST:
         if left_child and not right_child:
             return left_child
         if left_child and right_child:
-            min_node = self.FinMinMax(right_child, False).Node
+            min_node = self.FinMinMax(right_child, False)
             return min_node
 
     @staticmethod

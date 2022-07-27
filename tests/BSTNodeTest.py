@@ -237,12 +237,9 @@ class MyTestCase(unittest.TestCase):
         tree.AddKeyValue(7, 7)
         tree.AddKeyValue(9, 9)
         tree.AddKeyValue(10, 10)
-        expected_bst_find = BSTFind()
-        correct_node = tree.FindNodeByKey(10).Node
-        expected_bst_find.Node = correct_node
-        expected_bst_find.NodeHasKey = True
-        bst_find_to_check = tree.FinMinMax(root, True)
-        self.assertEqual(self.get_string_for_bst_find(expected_bst_find), self.get_string_for_bst_find(bst_find_to_check))  # add assertion here
+        expected_node = tree.FindNodeByKey(10).Node
+        actual_node = tree.FinMinMax(root, True)
+        self.assertEqual(expected_node, actual_node)  # add assertion here
 
     def test_find_min_root(self):
         root = BSTNode(5, 5, None)
@@ -253,11 +250,9 @@ class MyTestCase(unittest.TestCase):
         tree.AddKeyValue(9, 9)
         tree.AddKeyValue(10, 10)
         expected_bst_find = BSTFind()
-        correct_node = tree.FindNodeByKey(1).Node
-        expected_bst_find.Node = correct_node
-        expected_bst_find.NodeHasKey = True
-        bst_find_to_check = tree.FinMinMax(root, False)
-        self.assertEqual(self.get_string_for_bst_find(expected_bst_find), self.get_string_for_bst_find(bst_find_to_check))  # add assertion here
+        expected_node = tree.FindNodeByKey(1).Node
+        actual_node = tree.FinMinMax(root, False)
+        self.assertEqual(expected_node, actual_node)  # add assertion here
 
     def test_find_max_not_root(self):
         root = BSTNode(5, 5, None)
@@ -267,12 +262,9 @@ class MyTestCase(unittest.TestCase):
         tree.AddKeyValue(9, 9)
         tree.AddKeyValue(10, 10)
         start_node = tree.FindNodeByKey(7).Node
-        expected_bst_find = BSTFind()
-        correct_node = tree.FindNodeByKey(10).Node
-        expected_bst_find.Node = correct_node
-        expected_bst_find.NodeHasKey = True
-        bst_find_to_check = tree.FinMinMax(start_node, True)
-        self.assertEqual(self.get_string_for_bst_find(expected_bst_find), self.get_string_for_bst_find(bst_find_to_check))  # add assertion here
+        expected_node = tree.FindNodeByKey(10).Node
+        actual_node = tree.FinMinMax(start_node, True)
+        self.assertEqual(expected_node, actual_node)  # add assertion here
 
     def test_find_min_not_root(self):
         root = BSTNode(5, 5, None)
