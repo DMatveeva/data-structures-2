@@ -144,12 +144,54 @@ class BST:
 
     def get_all_nodes(self):
         all_nodes = []
-        self.collect_children_nodes(self.Root, all_nodes)
+        self.deep_pre_order(self.Root, all_nodes)
         return all_nodes
 
-    def collect_children_nodes(self, node, nodes):
+    def WideAllNodes(self):
+        all_nodes = [self.Root]
+        nodes_to_add = [self.Root.LeftChild, self.Root.RightChild]
+        while nodes_to_add:
+            node = nodes_to_add.pop(0)
+            all_nodes.append(node)
+            left_child = node.LeftChild
+            right_child = node.RightChild
+            if left_child:
+                nodes_to_add.append(left_child)
+            if right_child:
+                nodes_to_add.append(right_child)
+        return tuple(all_nodes)
+
+    def DeepAllNodes(self, order):
+        all_nodes = []
+        if order == 0:
+            self.deep_in_order(self.Root, all_nodes)
+        if order == 1:
+            self.deep_post_order(self.Root, all_nodes)
+        if order == 2:
+            self.deep_pre_order(self.Root, all_nodes)
+        return all_nodes
+
+    def deep_in_order(self, node, nodes):
+        if not node:
+            return
+        self.deep_in_order(node.LeftChild, nodes)
+        nodes.append(node)
+        self.deep_in_order(node.RightChild, nodes)
+
+    def deep_post_order(self, node, nodes):
+        if not node:
+            return
+        self.deep_post_order(node.LeftChild, nodes)
+        self.deep_post_order(node.RightChild, nodes)
+        nodes.append(node)
+
+    def deep_pre_order(self, node, nodes):
         if not node:
             return
         nodes.append(node)
-        self.collect_children_nodes(node.LeftChild, nodes)
-        self.collect_children_nodes(node.RightChild, nodes)
+        self.deep_pre_order(node.LeftChild, nodes)
+        self.deep_pre_order(node.RightChild, nodes)
+
+
+
+

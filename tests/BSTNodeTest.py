@@ -342,6 +342,172 @@ class MyTestCase(unittest.TestCase):
         node_value = str(bst_find.Node.NodeKey) if bst_find.Node else 'None'
         return node_value + ',' + str(bst_find.NodeHasKey) + ',' + str(bst_find.ToLeft)
 
+    def test_wide(self):
+        root = BSTNode(8, 0, None)
+        tree = BST(root)
+        tree.AddKeyValue(4, 4)
+        tree.AddKeyValue(12, 12)
+        tree.AddKeyValue(2, 2)
+        tree.AddKeyValue(6, 6)
+        tree.AddKeyValue(10, 10)
+        tree.AddKeyValue(14, 14)
+        tree.AddKeyValue(1, 1)
+        tree.AddKeyValue(3, 3)
+        tree.AddKeyValue(5, 5)
+        tree.AddKeyValue(7, 7)
+        tree.AddKeyValue(9, 9)
+        tree.AddKeyValue(11, 11)
+        tree.AddKeyValue(13, 13)
+        tree.AddKeyValue(15, 15)
+
+        all_nodes = tree.WideAllNodes()
+
+        expected_bst = '[8,0,None,4,12]' \
+                       '[4,4,8,2,6]' \
+                       '[12,12,8,10,14]' \
+                       '[2,2,4,1,3]' \
+                       '[6,6,4,5,7]' \
+                       '[10,10,12,9,11]' \
+                       '[14,14,12,13,15]' \
+                       '[1,1,2,None,None]' \
+                       '[3,3,2,None,None]' \
+                       '[5,5,6,None,None]' \
+                       '[7,7,6,None,None]' \
+                       '[9,9,10,None,None]' \
+                       '[11,11,10,None,None]' \
+                       '[13,13,14,None,None]' \
+                       '[15,15,14,None,None]'
+
+        self.assertEqual(expected_bst, self.get_string_for_nodes(all_nodes))
+
+    def test_deep_in_order(self):
+        root = BSTNode(8, 0, None)
+        tree = BST(root)
+        tree.AddKeyValue(4, 4)
+        tree.AddKeyValue(12, 12)
+        tree.AddKeyValue(2, 2)
+        tree.AddKeyValue(6, 6)
+        tree.AddKeyValue(10, 10)
+        tree.AddKeyValue(14, 14)
+        tree.AddKeyValue(1, 1)
+        tree.AddKeyValue(3, 3)
+        tree.AddKeyValue(5, 5)
+        tree.AddKeyValue(7, 7)
+        tree.AddKeyValue(9, 9)
+        tree.AddKeyValue(11, 11)
+        tree.AddKeyValue(13, 13)
+        tree.AddKeyValue(15, 15)
+
+        all_nodes = tree.DeepAllNodes(0)
+
+        expected_bst = '[1,1,2,None,None]' \
+                       '[2,2,4,1,3]' \
+                       '[3,3,2,None,None]' \
+                       '[4,4,8,2,6]' \
+                       '[5,5,6,None,None]' \
+                       '[6,6,4,5,7]' \
+                       '[7,7,6,None,None]' \
+                       '[8,0,None,4,12]' \
+                       '[9,9,10,None,None]' \
+                       '[10,10,12,9,11]' \
+                       '[11,11,10,None,None]' \
+                       '[12,12,8,10,14]' \
+                       '[13,13,14,None,None]' \
+                       '[14,14,12,13,15]' \
+                       '[15,15,14,None,None]'
+
+        self.assertEqual(expected_bst, self.get_string_for_nodes(all_nodes))
+
+    def test_deep_post_order(self):
+        root = BSTNode(8, 0, None)
+        tree = BST(root)
+        tree.AddKeyValue(4, 4)
+        tree.AddKeyValue(12, 12)
+        tree.AddKeyValue(2, 2)
+        tree.AddKeyValue(6, 6)
+        tree.AddKeyValue(10, 10)
+        tree.AddKeyValue(14, 14)
+        tree.AddKeyValue(1, 1)
+        tree.AddKeyValue(3, 3)
+        tree.AddKeyValue(5, 5)
+        tree.AddKeyValue(7, 7)
+        tree.AddKeyValue(9, 9)
+        tree.AddKeyValue(11, 11)
+        tree.AddKeyValue(13, 13)
+        tree.AddKeyValue(15, 15)
+
+        all_nodes = tree.DeepAllNodes(1)
+
+        expected_bst = '[1,1,2,None,None]' \
+                       '[3,3,2,None,None]' \
+                       '[2,2,4,1,3]' \
+                       '[5,5,6,None,None]' \
+                       '[7,7,6,None,None]' \
+                       '[6,6,4,5,7]' \
+                       '[4,4,8,2,6]' \
+                       '[9,9,10,None,None]' \
+                       '[11,11,10,None,None]' \
+                       '[10,10,12,9,11]' \
+                       '[13,13,14,None,None]' \
+                       '[15,15,14,None,None]' \
+                       '[14,14,12,13,15]' \
+                       '[12,12,8,10,14]' \
+                       '[8,0,None,4,12]' \
+
+
+        self.assertEqual(expected_bst, self.get_string_for_nodes(all_nodes))
+
+    def test_deep_pre_order(self):
+        root = BSTNode(8, 0, None)
+        tree = BST(root)
+        tree.AddKeyValue(4, 4)
+        tree.AddKeyValue(12, 12)
+        tree.AddKeyValue(2, 2)
+        tree.AddKeyValue(6, 6)
+        tree.AddKeyValue(10, 10)
+        tree.AddKeyValue(14, 14)
+        tree.AddKeyValue(1, 1)
+        tree.AddKeyValue(3, 3)
+        tree.AddKeyValue(5, 5)
+        tree.AddKeyValue(7, 7)
+        tree.AddKeyValue(9, 9)
+        tree.AddKeyValue(11, 11)
+        tree.AddKeyValue(13, 13)
+        tree.AddKeyValue(15, 15)
+
+        all_nodes = tree.DeepAllNodes(2)
+
+        expected_bst = '[8,0,None,4,12]' \
+                       '[4,4,8,2,6]' \
+                       '[12,12,8,10,14]' \
+                       '[2,2,4,1,3]' \
+                       '[6,6,4,5,7]' \
+                       '[10,10,12,9,11]' \
+                       '[14,14,12,13,15]' \
+                       '[1,1,2,None,None]' \
+                       '[3,3,2,None,None]' \
+                       '[5,5,6,None,None]' \
+                       '[7,7,6,None,None]' \
+                       '[9,9,10,None,None]' \
+                       '[11,11,10,None,None]' \
+                       '[13,13,14,None,None]' \
+                       '[15,15,14,None,None]'
+
+
+        self.assertEqual(expected_bst, self.get_string_for_nodes(all_nodes))
+
+
+    @staticmethod
+    def get_string_for_nodes(all_nodes):
+        string = ''
+        for node in all_nodes:
+            parent_val = str(node.Parent.NodeKey) if node.Parent else 'None'
+            left_val = str(node.LeftChild.NodeKey) if node.LeftChild else 'None'
+            right_val = str(node.RightChild.NodeKey) if node.RightChild else 'None'
+            string += '[' + str(node.NodeKey) + ',' + str(node.NodeValue) + ',' + parent_val + ',' + \
+                      left_val + ',' + right_val + ']'
+        return string
+
 
 if __name__ == '__main__':
     unittest.main()
