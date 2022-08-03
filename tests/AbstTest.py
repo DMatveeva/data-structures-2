@@ -6,25 +6,19 @@ from aBST import aBST
 class MyTestCase(unittest.TestCase):
 
     # depth = 0
-    def test_FindKeyIndex_0(self):
-        tree = aBST(0)
-        element = tree.FindKeyIndex(8)
-        self.assertEqual(None, element)
-
-    # depth = 0
     def test_FindKeyIndex_1(self):
-        tree = aBST(1)
+        tree = aBST(0)
         element = tree.FindKeyIndex(8)
         self.assertEqual(0, element)
 
     def test_FindKeyIndex_2(self):
-        tree = aBST(1)
+        tree = aBST(0)
         tree.Tree[0] = 8
         element = tree.FindKeyIndex(8)
         self.assertEqual(0, element)
 
     def test_FindKeyIndex_3(self):
-        tree = aBST(4)
+        tree = aBST(3)
         tree.Tree[0] = 50
         tree.Tree[1] = 25
         tree.Tree[2] = 75
@@ -57,14 +51,14 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(None, tree.FindKeyIndex(100))
 
     def test_AddKey(self):
-        tree = aBST(1)
+        tree = aBST(0)
 
         self.assertEqual(0, tree.AddKey(50))
         self.assertEqual(50, tree.Tree[0])
         self.assertEqual(0, tree.AddKey(50))
 
     def test_AddKey(self):
-        tree = aBST(4)
+        tree = aBST(3)
 
         self.assertEqual(0, tree.AddKey(50))
         self.assertEqual(50, tree.Tree[0])
