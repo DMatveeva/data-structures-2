@@ -3,7 +3,7 @@ def GenerateBBSTArray(a):
     a.sort()
     new_array = [None] * tree_size
     generate_bst_recursive(a, new_array, 0)
-    return a
+    return new_array
 
 
 def generate_bst_recursive(old_array, new_array, i):
@@ -17,7 +17,6 @@ def generate_bst_recursive(old_array, new_array, i):
 
     old_len = len(old_array)
     index_of_center = old_len // 2
-    print(index_of_center)
     center = old_array[index_of_center]
     new_array[i] = center
     # [0 ... index_of_center)
