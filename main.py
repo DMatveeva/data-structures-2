@@ -1,7 +1,3 @@
-def fun(val):
-    val += 1
-
-
-i = 3
-fun(i)
-print(i)
+a = ['a', 'b', 'c', 'd', 'e']
+print(a[:3])
+print(a[4:])
