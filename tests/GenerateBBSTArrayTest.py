@@ -26,7 +26,7 @@ class MyTestCase(unittest.TestCase):
         # [12, 16, 19, 25, 31, 37, 43, 50, 55, 62, 65, 75, 84, 90, 92]
         # 50, 25, 75, 16, 37, 62, 84, 12, 19, 31, 43, 55, 65, 82, 92
         new_array = GenerateBBSTArray(a)
-        self.assertEqual('[50, 25, 75, 16, 37, 62, 84, 12, 19, 31, 43, 55, 65, 82, 92]', new_array)  # add assertion here
+        self.assertEqual('[50, 25, 75, 16, 37, 62, 84, 12, 19, 31, 43, 55, 65, 82, 92]', str(new_array))  # add assertion here
 
 
 if __name__ == '__main__':
