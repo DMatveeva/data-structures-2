@@ -82,4 +82,18 @@ class BalancedBST:
         else:
             return right_depth
 
+    def WideAllNodes(self):
+        all_nodes = [self.Root]
+        nodes_to_add = [self.Root.LeftChild, self.Root.RightChild]
+        while nodes_to_add:
+            node = nodes_to_add.pop(0)
+            all_nodes.append(node)
+            left_child = node.LeftChild
+            right_child = node.RightChild
+            if left_child:
+                nodes_to_add.append(left_child)
+            if right_child:
+                nodes_to_add.append(right_child)
+        return tuple(all_nodes)
+
 
