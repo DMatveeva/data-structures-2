@@ -45,7 +45,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(expected_bst, self.get_string_for_tree(tree))
         self.assertEqual(True, tree.IsBalanced(tree.Root))
 
-    def test_1(self):
+    def test_2(self):
         tree = BalancedBST()
         a = [None] * 5
         a[0] = 50
@@ -61,6 +61,25 @@ class MyTestCase(unittest.TestCase):
                        '[84,75,None,92,1]' \
                        '[50,25,None,None,2]' \
                        '[92,84,None,None,2]'
+
+        self.assertEqual(expected_bst, self.get_string_for_tree(tree))
+        self.assertEqual(True, tree.IsBalanced(tree.Root))
+
+
+    def test_3(self):
+        tree = BalancedBST()
+        a = [None] * 4
+        a[0] = 50
+        a[1] = 84
+        a[2] = 75
+        a[3] = 25
+
+        tree.GenerateTree(a)
+
+        expected_bst = '[50,None,25,75,0]' \
+                       '[25,50,None,None,1]' \
+                       '[75,50,None,84,1]' \
+                       '[84,75,None,None,2]' \
 
         self.assertEqual(expected_bst, self.get_string_for_tree(tree))
         self.assertEqual(True, tree.IsBalanced(tree.Root))
