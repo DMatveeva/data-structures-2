@@ -4,10 +4,9 @@ from BalancedBST import BalancedBST
 
 
 class MyTestCase(unittest.TestCase):
-    def test_something(self):
-        self.assertEqual(True, False)  # add assertion here
 
-    def test_FindKeyIndex_1(self):
+
+    def test_1(self):
         tree = BalancedBST()
         a = [None] * 15
         a[0] = 50
@@ -45,6 +44,27 @@ class MyTestCase(unittest.TestCase):
 
         self.assertEqual(expected_bst, self.get_string_for_tree(tree))
         self.assertEqual(True, tree.IsBalanced(tree.Root))
+
+    def test_1(self):
+        tree = BalancedBST()
+        a = [None] * 5
+        a[0] = 50
+        a[1] = 92
+        a[2] = 84
+        a[3] = 75
+        a[4] = 25
+
+        tree.GenerateTree(a)
+
+        expected_bst = '[50,None,25,75,0]' \
+                       '[25,50,None,None,1]' \
+                       '[75,50,None,84,1]' \
+                       '[84,75,None,92,2]' \
+                       '[92,84,None,None,3]'
+
+        self.assertEqual(expected_bst, self.get_string_for_tree(tree))
+        self.assertEqual(False, tree.IsBalanced(tree.Root))
+
 
 
     @staticmethod
