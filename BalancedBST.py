@@ -36,7 +36,7 @@ class BalancedBST:
 
         if index - 1 >= start_index:
             self.generate_recursive(node, a, start_index, index - 1)
-        if index + 1 < end_index:
+        if index + 1 <= end_index:
             self.generate_recursive(node, a, index + 1, end_index)
 
         return node
@@ -51,9 +51,9 @@ class BalancedBST:
         if not node.LeftChild and not node.RightChild:
             return True
         if not node.LeftChild:
-            self.is_node_balanced(node.RightChild)
+            return self.is_node_balanced(node.RightChild)
         if not node.RightChild:
-            self.is_node_balanced(node.LeftChild)
+            return self.is_node_balanced(node.LeftChild)
 
         self.is_node_balanced(node.LeftChild)
         self.is_node_balanced(node.RightChild)

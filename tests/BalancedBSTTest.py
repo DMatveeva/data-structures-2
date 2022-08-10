@@ -56,14 +56,14 @@ class MyTestCase(unittest.TestCase):
 
         tree.GenerateTree(a)
 
-        expected_bst = '[50,None,25,75,0]' \
-                       '[25,50,None,None,1]' \
-                       '[75,50,None,84,1]' \
-                       '[84,75,None,92,2]' \
-                       '[92,84,None,None,3]'
+        expected_bst = '[75,None,25,84,0]' \
+                       '[25,75,None,50,1]' \
+                       '[84,75,None,92,1]' \
+                       '[50,25,None,None,2]' \
+                       '[92,84,None,None,2]'
 
         self.assertEqual(expected_bst, self.get_string_for_tree(tree))
-        self.assertEqual(False, tree.IsBalanced(tree.Root))
+        self.assertEqual(True, tree.IsBalanced(tree.Root))
 
 
 
