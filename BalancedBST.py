@@ -18,7 +18,6 @@ class BalancedBST:
         self.generate_recursive(None, a, 0, len(a)-1)
 
     def generate_recursive(self, parent_node, a, start_index, end_index):
-        print(str(start_index) + '-' + str(end_index))
         if end_index == start_index:
             index = end_index
         else:
