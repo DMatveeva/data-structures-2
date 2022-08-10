@@ -15,10 +15,13 @@ class BalancedBST:
 
     def GenerateTree(self, a):
         a.sort()
-        self.generate_recursive(None, a, 0, len(a))
+        self.generate_recursive(None, a, 0, len(a)-1)
 
     def generate_recursive(self, parent_node, a, start_index, end_index):
-        index = (end_index - start_index) // 2
+        if end_index == start_index:
+            index = end_index
+        else:
+            index = (end_index + start_index) // 2
         key = a[index]
         node = BSTNode(key, parent_node)
         if parent_node is None:
@@ -31,8 +34,10 @@ class BalancedBST:
             parent_node.RightChild = node
             node.Level = parent_node.Level + 1
 
-        self.generate_recursive(node, a, start_index, index - 1)
-        self.generate_recursive(node, a, index + 1, end_index)
+        if index - 1 >= 0 and end_index != start_index:
+            self.generate_recursive(node, a, start_index, index - 1)
+        if index + 1 < len(a) and end_index != start_index:
+            self.generate_recursive(node, a, index + 1, end_index)
 
         return node
 
