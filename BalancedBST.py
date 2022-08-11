@@ -11,7 +11,7 @@ class BSTNode:
 class BalancedBST:
 
     def __init__(self):
-        self.Root = None  # корень дерева
+        self.Root = None
 
     def GenerateTree(self, a):
         a.sort()
