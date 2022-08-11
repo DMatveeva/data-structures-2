@@ -1,6 +1,6 @@
 import unittest
 
-from BalancedBST import BalancedBST
+from BalancedBST import BalancedBST, BSTNode
 
 
 class MyTestCase(unittest.TestCase):
@@ -83,6 +83,67 @@ class MyTestCase(unittest.TestCase):
 
         self.assertEqual(expected_bst, self.get_string_for_tree(tree))
         self.assertEqual(True, tree.IsBalanced(tree.Root))
+
+    def test_4(self):
+        tree = BalancedBST()
+        root = BSTNode(50, None)
+        node25 = BSTNode(25, root)
+        node25.Level = 1
+        node75 = BSTNode(75, root)
+        node75.Level = 1
+        root.LeftChild = node25
+        root.RightChild = node75
+        node84 = BSTNode(84, node75)
+        node84.Level = 2
+        node75.RightChild = node84
+        node92 = BSTNode(92, node84)
+        node92.Level = 3
+        node84.RightChild = node92
+        tree.Root = root
+
+        expected_bst = '[50,None,25,75,0]' \
+                       '[25,50,None,None,1]' \
+                       '[75,50,None,84,1]' \
+                       '[84,75,None,92,2]' \
+                       '[92,84,None,None,3]'
+
+        self.assertEqual(expected_bst, self.get_string_for_tree(tree))
+        self.assertEqual(False, tree.IsBalanced(tree.Root))
+
+    def test_5(self):
+        tree = BalancedBST()
+        root = BSTNode(50, None)
+        node25 = BSTNode(25, root)
+        node25.Level = 1
+        node16 = BSTNode(16, node25)
+        node16.Level = 2
+        node25.LeftChild = node16
+        node75 = BSTNode(75, root)
+        node75.Level = 1
+        root.LeftChild = node25
+        root.RightChild = node75
+        node84 = BSTNode(84, node75)
+        node84.Level = 2
+        node75.RightChild = node84
+        node92 = BSTNode(92, node84)
+        node92.Level = 3
+        node84.RightChild = node92
+        node93 = BSTNode(93, node92)
+        node93.Level = 4
+        node92.RightChild = node93
+        tree.Root = root
+
+        expected_bst = '[50,None,25,75,0]' \
+                       '[25,50,16,None,1]' \
+                       '[75,50,None,84,1]' \
+                       '[16,25,None,None,2]' \
+                       '[84,75,None,92,2]' \
+                       '[92,84,None,93,3]' \
+                       '[93,92,None,None,4]'
+
+        self.assertEqual(expected_bst, self.get_string_for_tree(tree))
+        self.assertEqual(False, tree.IsBalanced(tree.Root))
+
 
 
 

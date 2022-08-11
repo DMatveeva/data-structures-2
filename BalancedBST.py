@@ -45,21 +45,24 @@ class BalancedBST:
         return self.is_node_balanced(root_node)
 
     def is_node_balanced(self, node):
+        print(node.NodeKey)
         if node is None:
             return True
-
         if not node.LeftChild and not node.RightChild:
             return True
-        if not node.LeftChild:
-            return self.is_node_balanced(node.RightChild)
-        if not node.RightChild:
-            return self.is_node_balanced(node.LeftChild)
-
-        self.is_node_balanced(node.LeftChild)
-        self.is_node_balanced(node.RightChild)
-
-        left_depth = self.get_depth(node.LeftChild)
-        right_depth = self.get_depth(node.RightChild)
+        elif not node.LeftChild:
+            self.is_node_balanced(node.RightChild)
+            left_depth = node.Level
+            right_depth = self.get_depth(node.RightChild)
+        elif not node.RightChild:
+            right_depth = node.Level
+            left_depth = self.get_depth(node.LeftChild)
+            self.is_node_balanced(node.LeftChild)
+        else:
+            self.is_node_balanced(node.LeftChild)
+            self.is_node_balanced(node.RightChild)
+            left_depth = self.get_depth(node.LeftChild)
+            right_depth = self.get_depth(node.RightChild)
 
         if abs(left_depth - right_depth) > 1:
             return False
@@ -67,15 +70,15 @@ class BalancedBST:
 
     def get_depth(self, node):
 
-        if node.LeftChild is None and node.RightChild is None:
+        if not node.LeftChild and not node.RightChild:
             return node.Level
-        if node.LeftChild:
+        elif node.LeftChild:
             return self.get_depth(node.LeftChild)
-        if node.RightChild:
+        elif node.RightChild:
             return self.get_depth(node.RightChild)
 
         left_depth = self.get_depth(node.LeftChild)
-        right_depth = self.get_depth(node.LeftChild)
+        right_depth = self.get_depth(node.RightChild)
 
         if left_depth > right_depth:
             return left_depth
