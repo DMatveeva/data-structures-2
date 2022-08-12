@@ -45,7 +45,6 @@ class BalancedBST:
         return self.is_node_balanced(root_node)
 
     def is_node_balanced(self, node):
-        print(node.NodeKey)
         if node is None:
             return True
         if not node.LeftChild and not node.RightChild:
