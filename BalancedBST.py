@@ -63,9 +63,7 @@ class BalancedBST:
             left_depth = self.get_depth(node.LeftChild)
             right_depth = self.get_depth(node.RightChild)
 
-        if abs(left_depth - right_depth) > 1:
-            return False
-        return True
+        return abs(left_depth - right_depth) <= 1
 
     def get_depth(self, node):
 
