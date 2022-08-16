@@ -1,15 +1,14 @@
 class Heap:
 
     def __init__(self):
-        self.HeapArray = []  # хранит неотрицательные числа-ключи
+        self.HeapArray = []
 
     def MakeHeap(self, a, depth):
         heap_size = pow(2, depth + 1) - 1
         self.HeapArray = heap_size * [None]
         for element in a:
-            self.Add(element)
-        # создаём массив кучи HeapArray из заданного
-        # размер массива выбираем на основе глубины depth
+            if element is not None:
+                self.Add(element)
 
     def GetMax(self):
         root = self.HeapArray[0]
@@ -26,6 +25,21 @@ class Heap:
             left_child = self.HeapArray[index_of_left_child]
             index_of_right_child = 2 * i + 2
             right_child = self.HeapArray[index_of_right_child]
+            if not left_child and not right_child:
+                break
+            if not left_child and right_child > element:
+                self.HeapArray[right_child] = element
+                self.HeapArray[i] = right_child
+                break
+            if not left_child and right_child < element:
+                break
+            if not right_child and left_child > element:
+                self.HeapArray[left_child] = element
+                self.HeapArray[i] = left_child
+                break
+            if not right_child and left_child < element:
+                break
+
             max_of_children = left_child if left_child > right_child else right_child
             index_of_max_of_children = index_of_left_child if left_child > right_child else index_of_right_child
             if max_of_children > element:
@@ -34,8 +48,7 @@ class Heap:
                 i = index_of_max_of_children
             else:
                 break
-        # вернуть значение корня и перестроить кучу
-        return root  # если куча пуста
+        return root
 
     def find_none_index(self, a):
         i = 0
@@ -57,9 +70,7 @@ class Heap:
             if parent < element:
                 self.HeapArray[i] = parent
                 self.HeapArray[index_of_parent] = element
-                i = parent
+                i = index_of_parent
             else:
                 break
-        # добавляем новый элемент key в кучу и перестраиваем её
-
-        return True  # если куча вся заполнена
+        return True

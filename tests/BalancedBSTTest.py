@@ -144,9 +144,6 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(expected_bst, self.get_string_for_tree(tree))
         self.assertEqual(False, tree.IsBalanced(tree.Root))
 
-
-
-
     @staticmethod
     def get_string_for_tree(tree):
         all_nodes = tree.WideAllNodes()
