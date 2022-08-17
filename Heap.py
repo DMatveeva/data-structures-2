@@ -14,14 +14,20 @@ class Heap:
         root = self.HeapArray[0]
         if root is None:
             return -1
-        index_of_last_not_none = self.find_none_index(self.HeapArray) - 1
-        self.HeapArray[0] = self.HeapArray[index_of_last_not_none]
-        self.HeapArray[index_of_last_not_none] = None
+        last_index = len(self.HeapArray) - 1
+        if self.HeapArray[last_index]:
+            index_of_last_element = last_index
+        else:
+            index_of_last_element = self.find_none_index(self.HeapArray) - 1
+        self.HeapArray[0] = self.HeapArray[index_of_last_element]
+        self.HeapArray[index_of_last_element] = None
 
         i = 0
-        while i < index_of_last_not_none:
+        while i < index_of_last_element:
             element = self.HeapArray[i]
             index_of_left_child = 2 * i + 1
+            if index_of_left_child >= len(self.HeapArray):
+                break
             left_child = self.HeapArray[index_of_left_child]
             index_of_right_child = 2 * i + 2
             right_child = self.HeapArray[index_of_right_child]
@@ -39,7 +45,6 @@ class Heap:
                 break
             if not right_child and left_child < element:
                 break
-
             max_of_children = left_child if left_child > right_child else right_child
             index_of_max_of_children = index_of_left_child if left_child > right_child else index_of_right_child
             if max_of_children > element:
