@@ -29,6 +29,7 @@ class SimpleGraph:
         i = v
         while i < self.max_vertex - 1:
             self.vertex[i] = self.vertex[i + 1]
+            i += 1
         self.vertex[self.max_vertex - 1] = None
         x = 0
 
@@ -36,6 +37,7 @@ class SimpleGraph:
             y = v + 1
             while y < self.max_vertex - 1:
                 self.m_adjacency[y][x] = self.m_adjacency[y + 1][x]
+                y += 1
             x += 1
 
         y = 0
@@ -43,6 +45,7 @@ class SimpleGraph:
             x = v + 1
             while x < self.max_vertex - 1:
                 self.m_adjacency[y][x] = self.m_adjacency[y][x + 1]
+                x += 1
             y += 1
 
     def IsEdge(self, v1, v2):
