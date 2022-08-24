@@ -69,17 +69,28 @@ class SimpleGraph:
             x = y + 1
             while x < self.max_vertex:
                 if matrix[y][x] == 0:
+                    x += 1
                     continue
-                supposed_tree = []
-                self.create_subtree_recursive(y, supposed_tree, matrix)
+                matrix[y][x] = 0
+                matrix[x][y] = 0
+                supposed_tree = [y]
+                self.create_subtree_recursive(x, supposed_tree, matrix)
                 if len(supposed_tree) % 2 == 0:
-                    matrix[y][x] = 0
-                    matrix[x][y] = 0
                     edges_to_break.append(y)
                     edges_to_break.append(x)
+                else:
+                    matrix[y][x] = 1
+                    matrix[x][y] = 1
                 x += 1
             y += 1
-        return edges_to_break
+        values = []
+        i = 0
+        while i < len(edges_to_break):
+            index_of_vertex = edges_to_break[i]
+            value_of_vertex = self.vertex[index_of_vertex].Value
+            values.append(value_of_vertex)
+            i += 1
+        return values
 
     def create_subtree_recursive(self, vertex_index, tree, matrix):
         child_index = vertex_index + 1
