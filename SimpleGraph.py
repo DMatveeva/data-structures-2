@@ -61,7 +61,7 @@ class SimpleGraph:
         self.m_adjacency[v2][v1] = 0
 
     def EvenTrees(self):
-        edges_to_break = []
+        indices_of_vertex = []
         matrix = [row[:] for row in self.m_adjacency]
 
         y = 0
@@ -76,21 +76,20 @@ class SimpleGraph:
                 supposed_tree = [y]
                 self.create_subtree_recursive(x, supposed_tree, matrix)
                 if len(supposed_tree) % 2 == 0:
-                    edges_to_break.append(y)
-                    edges_to_break.append(x)
+                    indices_of_vertex.append(y)
+                    indices_of_vertex.append(x)
                 else:
                     matrix[y][x] = 1
                     matrix[x][y] = 1
                 x += 1
             y += 1
-        values = []
+        vertex_to_break = []
         i = 0
-        while i < len(edges_to_break):
-            index_of_vertex = edges_to_break[i]
-            value_of_vertex = self.vertex[index_of_vertex].Value
-            values.append(value_of_vertex)
+        while i < len(indices_of_vertex):
+            index_of_vertex = indices_of_vertex[i]
+            vertex_to_break.append(self.vertex[index_of_vertex])
             i += 1
-        return values
+        return vertex_to_break
 
     def create_subtree_recursive(self, vertex_index, tree, matrix):
         child_index = vertex_index + 1
