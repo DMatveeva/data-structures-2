@@ -59,3 +59,38 @@ class SimpleGraph:
     def RemoveEdge(self, v1, v2):
         self.m_adjacency[v1][v2] = 0
         self.m_adjacency[v2][v1] = 0
+
+    def EvenTrees(self):
+        edges_to_break = []
+        matrix = [row[:] for row in self.m_adjacency]
+
+        y = 0
+        while y < self.max_vertex:
+            x = y + 1
+            while x < self.max_vertex:
+                if matrix[y][x] == 0:
+                    continue
+                supposed_tree = []
+                self.create_subtree_recursive(y, supposed_tree, matrix)
+                if len(supposed_tree) % 2 == 0:
+                    matrix[y][x] = 0
+                    matrix[x][y] = 0
+                    edges_to_break.append(y)
+                    edges_to_break.append(x)
+                x += 1
+            y += 1
+        return edges_to_break
+
+    def create_subtree_recursive(self, vertex_index, tree, matrix):
+        child_index = vertex_index + 1
+        while child_index < self.max_vertex:
+            e = matrix[vertex_index][child_index]
+            if e == 1:
+                tree.append(child_index)
+                self.create_subtree_recursive(child_index, tree, matrix)
+            child_index += 1
+
+
+
+
+
