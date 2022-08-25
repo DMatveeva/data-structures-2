@@ -20,16 +20,12 @@ class SimpleTree:
     def update_nodes_to_return(self, node, nodes_to_return):
         for child in node.Children:
             nodes_in_subtree = []
-            subtree_size = len(self.get_nodes_in_subtree_from_node(node, nodes_in_subtree))
+            self.collect_children_nodes(child, nodes_in_subtree)
+            subtree_size = len(nodes_in_subtree)
             if subtree_size % 2 == 0:
                 nodes_to_return.append(node)
                 nodes_to_return.append(child)
             self.update_nodes_to_return(child, nodes_to_return)
-
-    def get_nodes_in_subtree_from_node(self, node, nodes_in_subtree):
-        self.collect_children_nodes(node, nodes_in_subtree)
-        return nodes_in_subtree
-
 
     def AddChild(self, ParentNode, NewChild):
         NewChild.Parent = ParentNode

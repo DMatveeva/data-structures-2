@@ -1,16 +1,35 @@
 import unittest
 
-from SimpleTreeNode import SimpleTreeNode, SimpleTree
+from SimpleTree import SimpleTreeNode, SimpleTree
 
 
 class MyTestCase(unittest.TestCase):
-    def test_(self):
-        root = SimpleTreeNode(1, None)
-        tree = SimpleTree(root)
-        list = tree.EvenTrees()
-        print(list)
-        result = '[1,None][2,1]'
-        self.assertEqual(self.get_string_for_tree(tree), result)  # add assertion here
+    def test_even_tree(self):
+        node1 = SimpleTreeNode(1, None)
+        tree = SimpleTree(node1)
+        node2 = SimpleTreeNode(2, node1)
+        node3 = SimpleTreeNode(3, node1)
+        node6 = SimpleTreeNode(6, node1)
+        node5 = SimpleTreeNode(5, node2)
+        node7 = SimpleTreeNode(7, node2)
+        node4 = SimpleTreeNode(4, node3)
+        node8 = SimpleTreeNode(8, node6)
+        node9 = SimpleTreeNode(9, node8)
+        node10 = SimpleTreeNode(10, node9)
+
+        tree.AddChild(node1, node2)
+        tree.AddChild(node1, node3)
+        tree.AddChild(node1, node6)
+        tree.AddChild(node2, node5)
+        tree.AddChild(node2, node7)
+        tree.AddChild(node3, node4)
+        tree.AddChild(node6, node8)
+        tree.AddChild(node8, node9)
+        tree.AddChild(node8, node10)
+
+        actual = tree.EvenTrees()
+        expected = [node1, node3, node1, node6]
+        self.assertEqual(self.get_string_for_nodes(expected), self.get_string_for_nodes(actual))
 
     def test_add_child_0(self):
         root = SimpleTreeNode(1, None)
