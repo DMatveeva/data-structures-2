@@ -1,13 +1,14 @@
 import unittest
 
-from SimpleGraph import SimpleTreeNode, SimpleTree
+from SimpleTreeNode import SimpleTreeNode, SimpleTree
 
 
 class MyTestCase(unittest.TestCase):
     def test_(self):
         root = SimpleTreeNode(1, None)
         tree = SimpleTree(root)
-        tree.EvenTrees()
+        list = tree.EvenTrees()
+        print(list)
         result = '[1,None][2,1]'
         self.assertEqual(self.get_string_for_tree(tree), result)  # add assertion here
 
