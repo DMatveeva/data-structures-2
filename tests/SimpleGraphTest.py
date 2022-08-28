@@ -53,8 +53,16 @@ class MyTestCase(unittest.TestCase):
         graph = self.get_graph()
         v0 = graph.vertex[0]
         v1 = graph.vertex[1]
-
         actual = graph.DepthFirstSearch(0, 1)
+        expected = [v0, v1]
+        self.assertEqual(expected, actual)
+
+    def test_depth_search_1(self):
+        graph = self.get_graph()
+        v0 = graph.vertex[0]
+        v1 = graph.vertex[1]
+        v7 = graph.vertex[6]
+        actual = graph.DepthFirstSearch(0, 6)
         expected = [v0, v1]
         self.assertEqual(expected, actual)
 
