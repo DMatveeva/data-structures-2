@@ -19,7 +19,6 @@ class MyTestCase(unittest.TestCase):
     def test_2(self):
         graph = SimpleGraph(3)
         graph.AddVertex(0)
-        graph.RemoveVertex(0)
         expected_vertex = '0,n,n,'
         self.assertEqual(expected_vertex, self.vertex_to_str(graph))  # add assertion here
         expected_m = '[0, 0, 0]\n' \
@@ -27,7 +26,7 @@ class MyTestCase(unittest.TestCase):
                      '[0, 0, 0]\n'
         self.assertEqual(expected_m, self.m_adjacency_to_str(graph))  # add assertion here
 
-    def test_even_tree(self):
+    def get_graph(selfs):
         graph = SimpleGraph(10)
         graph.AddVertex(1)
         graph.AddVertex(2)
@@ -48,9 +47,15 @@ class MyTestCase(unittest.TestCase):
         graph.AddEdge(5, 7)
         graph.AddEdge(7, 8)
         graph.AddEdge(7, 9)
+        return graph
 
-        actual = graph.EvenTrees()
-        expected = [1, 3, 1, 6]
+    def test_depth_search(self):
+        graph = self.get_graph()
+        v0 = graph.vertex[0]
+        v1 = graph.vertex[1]
+
+        actual = graph.DepthFirstSearch(0, 1)
+        expected = [v0, v1]
         self.assertEqual(expected, actual)
 
 
