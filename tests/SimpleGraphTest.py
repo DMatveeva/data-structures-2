@@ -60,10 +60,11 @@ class MyTestCase(unittest.TestCase):
     def test_depth_search_1(self):
         graph = self.get_graph()
         v0 = graph.vertex[0]
-        v1 = graph.vertex[1]
-        v7 = graph.vertex[6]
-        actual = graph.DepthFirstSearch(0, 6)
-        expected = [v0, v1]
+        v5 = graph.vertex[5]
+        v7 = graph.vertex[7]
+        v9 = graph.vertex[9]
+        actual = graph.DepthFirstSearch(0, 9)
+        expected = [v0, v5, v7, v9]
         self.assertEqual(expected, actual)
 
 

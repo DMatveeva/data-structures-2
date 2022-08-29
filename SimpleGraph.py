@@ -35,20 +35,22 @@ class SimpleGraph:
         self.m_adjacency = [[0] * size for _ in range(size)]
         self.vertex = [None] * size
 
-
     def DepthFirstSearch(self, VFrom, VTo):
         for v in self.vertex:
             v.Hit = False
         vertex_from = self.vertex[VFrom]
-        stack = Stack()
         vertex_from.Hit = True
-        stack.push(vertex_from)
+        stack = Stack()
+        stack.push(VFrom)
         self.depth_first_search_recursive(VFrom, VTo, stack)
-        return stack.stack
+        shortest_part = []
+        for index in stack.stack:
+            node = self.vertex[index]
+            shortest_part.append(node)
+        return shortest_part
 
     def depth_first_search_recursive(self, v_from, v_to, stack):
-        vertex_from = self.vertex[v_from]
-        i = 0
+        i = v_from
         while i < self.max_vertex:
             if self.m_adjacency[v_from][i] == 0:
                 i += 1
@@ -57,24 +59,20 @@ class SimpleGraph:
             if vertex.Hit:
                 i += 1
                 continue
-            vertex_from.Hit = True
-            stack.push(vertex)
+            vertex.Hit = True
+            stack.push(i)
             if v_to == i:
                 return stack
             else:
-                self.depth_first_search_recursive(i, v_to, stack)
-            i += 1
+                return self.depth_first_search_recursive(i, v_to, stack)
         stack.pop()
         if stack.size() == 0:
             return stack
         else:
-            v = stack.peek()
-            v.Hit = True
-            self.depth_first_search_recursive(stack.peek(), v_to, stack)
-
-    # узлы задаются позициями в списке vertex
-    # возвращается список узлов -- путь из VFrom в VTo
-    # или [] если пути нету
+            next_index = stack.peek()
+            next_vertex = self.vertex[next_index]
+            next_vertex.Hit = True
+            return self.depth_first_search_recursive(next_index, v_to, stack)
 
     def AddVertex(self, v):
         new_vertex = Vertex(v)
