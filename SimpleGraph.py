@@ -50,7 +50,7 @@ class SimpleGraph:
         return shortest_part
 
     def depth_first_search_recursive(self, v_from, v_to, stack):
-        i = v_from
+        i = 0
         while i < self.max_vertex:
             if self.m_adjacency[v_from][i] == 0:
                 i += 1

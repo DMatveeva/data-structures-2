@@ -43,10 +43,12 @@ class MyTestCase(unittest.TestCase):
         graph.AddEdge(0, 5)
         graph.AddEdge(1, 4)
         graph.AddEdge(1, 6)
-        graph.AddEdge(2, 3)
+  #      graph.AddEdge(2, 3)
         graph.AddEdge(5, 7)
         graph.AddEdge(7, 8)
         graph.AddEdge(7, 9)
+
+        graph.AddEdge(6, 3)
         return graph
 
     def test_depth_search(self):
@@ -60,9 +62,52 @@ class MyTestCase(unittest.TestCase):
     def test_depth_search_1(self):
         graph = self.get_graph()
         v0 = graph.vertex[0]
+        v1 = graph.vertex[1]
+        v2 = graph.vertex[2]
+        v3 = graph.vertex[3]
+        v4 = graph.vertex[4]
         v5 = graph.vertex[5]
+        v6 = graph.vertex[6]
         v7 = graph.vertex[7]
+        v8 = graph.vertex[8]
         v9 = graph.vertex[9]
+
+        actual = graph.DepthFirstSearch(0, 9)
+        expected = [v0, v5, v7, v9]
+        self.assertEqual(expected, actual)
+
+        actual = graph.DepthFirstSearch(0, 1)
+        expected = [v0, v1]
+        self.assertEqual(expected, actual)
+
+        actual = graph.DepthFirstSearch(0, 4)
+        expected = [v0, v1, v4]
+        self.assertEqual(expected, actual)
+
+        actual = graph.DepthFirstSearch(0, 6)
+        expected = [v0, v1, v6]
+        self.assertEqual(expected, actual)
+
+        actual = graph.DepthFirstSearch(0, 2)
+        expected = [v0, v2]
+        self.assertEqual(expected, actual)
+
+        actual = graph.DepthFirstSearch(0, 3)
+        expected = [v0, v1, v6, v3]
+        self.assertEqual(expected, actual)
+
+        actual = graph.DepthFirstSearch(0, 5)
+        expected = [v0, v5]
+        self.assertEqual(expected, actual)
+
+        actual = graph.DepthFirstSearch(0, 7)
+        expected = [v0, v5, v7]
+        self.assertEqual(expected, actual)
+
+        actual = graph.DepthFirstSearch(0, 8)
+        expected = [v0, v5, v7, v8]
+        self.assertEqual(expected, actual)
+
         actual = graph.DepthFirstSearch(0, 9)
         expected = [v0, v5, v7, v9]
         self.assertEqual(expected, actual)
