@@ -43,7 +43,7 @@ class MyTestCase(unittest.TestCase):
         graph.AddEdge(0, 5)
         graph.AddEdge(1, 4)
         graph.AddEdge(1, 6)
-  #      graph.AddEdge(2, 3)
+        graph.AddEdge(2, 3)
         graph.AddEdge(5, 7)
         graph.AddEdge(7, 8)
         graph.AddEdge(7, 9)
@@ -89,7 +89,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(expected, actual)
 
         actual = graph.DepthFirstSearch(0, 2)
-        expected = [v0, v2]
+        expected = [v0, v1, v6, v3, v2]
         self.assertEqual(expected, actual)
 
         actual = graph.DepthFirstSearch(0, 3)
