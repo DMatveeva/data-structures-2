@@ -5,6 +5,23 @@ class Vertex:
         self.Hit = False
 
 
+class Queue:
+    def __init__(self):
+        self.queue = []
+
+    def enqueue(self, item):
+        self.queue.append(item)
+
+    def dequeue(self):
+        if self.size() == 0:
+            return None
+        else:
+            return self.queue.pop(0)
+
+    def size(self):
+        return len(self.queue)
+
+
 class Stack:
     def __init__(self):
         self.stack = []
@@ -63,8 +80,7 @@ class SimpleGraph:
             stack.push(i)
             if v_to == i:
                 return stack
-            else:
-                return self.depth_first_search_recursive(i, v_to, stack)
+            return self.depth_first_search_recursive(i, v_to, stack)
         stack.pop()
         if stack.size() == 0:
             return stack
@@ -73,6 +89,38 @@ class SimpleGraph:
             next_vertex = self.vertex[next_index]
             next_vertex.Hit = True
             return self.depth_first_search_recursive(next_index, v_to, stack)
+
+    def BreadthFirstSearch(self, VFrom, VTo):
+        for v in self.vertex:
+            v.Hit = False
+
+        vertex_from = self.vertex[VFrom]
+        vertex_from.Hit = True
+        paths = {VFrom: [vertex_from]}
+        queue = Queue()
+        queue.enqueue(VFrom)
+
+        while queue.size() > 0:
+            vertex_index = queue.dequeue()
+            i = 0
+            while i < self.max_vertex:
+                neighbour_vertex = self.vertex[i]
+                if not neighbour_vertex:
+                    i += 1
+                    continue
+                if neighbour_vertex.Hit:
+                    i += 1
+                    continue
+                if self.m_adjacency[vertex_index][i] == 1:
+                    new_path = paths[vertex_index].copy()
+                    new_path.append(neighbour_vertex)
+                    paths[i] = new_path
+                    queue.enqueue(i)
+                    neighbour_vertex.Hit = True
+                if self.m_adjacency[vertex_index][i] == 1 and i == VTo:
+                    return paths[i]
+                i += 1
+        return []
 
     def AddVertex(self, v):
         new_vertex = Vertex(v)

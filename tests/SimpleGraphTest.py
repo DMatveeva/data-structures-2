@@ -38,6 +38,7 @@ class MyTestCase(unittest.TestCase):
         graph.AddVertex(8)
         graph.AddVertex(9)
         graph.AddVertex(10)
+
         graph.AddEdge(0, 1)
         graph.AddEdge(0, 2)
         graph.AddEdge(0, 5)
@@ -112,6 +113,68 @@ class MyTestCase(unittest.TestCase):
         expected = [v0, v5, v7, v9]
         self.assertEqual(expected, actual)
 
+        actual = graph.DepthFirstSearch(0, 93)
+        expected = [v0, v2, v3]
+        self.assertEqual(expected, actual)
+
+
+    def test_depth_search_2(self):
+        graph = self.get_graph()
+        v0 = graph.vertex[0]
+        v1 = graph.vertex[1]
+        v2 = graph.vertex[2]
+        v3 = graph.vertex[3]
+        v4 = graph.vertex[4]
+        v5 = graph.vertex[5]
+        v6 = graph.vertex[6]
+        v7 = graph.vertex[7]
+        v8 = graph.vertex[8]
+        v9 = graph.vertex[9]
+
+        actual = graph.BreadthFirstSearch(0, 6)
+        expected = [v0, v1, v6]
+        self.assertEqual('1,2,7,', self.list_of_vertex_to_str(actual))
+        self.assertEqual(expected, actual)
+
+        actual = graph.BreadthFirstSearch(0, 1)
+        expected = [v0, v1]
+        self.assertEqual('1,2,', self.list_of_vertex_to_str(actual))
+        self.assertEqual(expected, actual)
+
+        actual = graph.BreadthFirstSearch(0, 2)
+        expected = [v0, v2]
+        self.assertEqual('1,3,', self.list_of_vertex_to_str(actual))
+        self.assertEqual(expected, actual)
+
+        actual = graph.BreadthFirstSearch(0, 3)
+        expected = [v0, v2, v3]
+        self.assertEqual('1,3,4,', self.list_of_vertex_to_str(actual))
+        self.assertEqual(expected, actual)
+
+        actual = graph.BreadthFirstSearch(2, 1)
+        expected = [v2, v0, v1]
+        self.assertEqual('3,1,2,', self.list_of_vertex_to_str(actual))
+        self.assertEqual(expected, actual)
+
+        actual = graph.BreadthFirstSearch(2, 1)
+        expected = [v2, v0, v1]
+        self.assertEqual('3,1,2,', self.list_of_vertex_to_str(actual))
+        self.assertEqual(expected, actual)
+
+        actual = graph.BreadthFirstSearch(2, 10)
+        expected = []
+        self.assertEqual('', self.list_of_vertex_to_str(actual))
+        self.assertEqual(expected, actual)
+
+
+
+
+    def list_of_vertex_to_str(self, vertex):
+        s = ''
+        for v in vertex:
+            value = str(v.Value) if v else 'n'
+            s += value + ','
+        return s
 
     def vertex_to_str(self, graph):
         s = ''
