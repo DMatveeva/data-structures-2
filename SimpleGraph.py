@@ -53,7 +53,7 @@ class SimpleGraph:
 
     def WeakVertices(self):
 
-        strong_vertex = set()
+        strong_vertex_indices = set()
         i = 0
         while i < self.max_vertex:
             # get all neighbours of the vertex
@@ -70,14 +70,17 @@ class SimpleGraph:
                 m = 0
                 while m < len(neighbours):
                     if self.m_adjacency[k][m] == 1:
-                        strong_vertex.add(i)
+                        strong_vertex_indices.add(i)
                     m += 1
                 k += 1
             i += 1
 
-        all_vertex = set(range(0, self.max_vertex))
-        weak_vertex = all_vertex.difference(strong_vertex)
-        return list(weak_vertex)
+        all_vertex_indices = set(range(0, self.max_vertex))
+        weak_vertex_indices = all_vertex_indices.difference(strong_vertex_indices)
+        weak_vertex = []
+        for i in weak_vertex_indices:
+            weak_vertex.append(self.vertex[i])
+        return weak_vertex
 
     def DepthFirstSearch(self, VFrom, VTo):
         for v in self.vertex:

@@ -56,6 +56,7 @@ class MyTestCase(unittest.TestCase):
         graph.AddEdge(7, 9)
 
         graph.AddEdge(6, 3)
+        graph.AddEdge(1, 3)
         return graph
 
     def test_depth_search(self):
