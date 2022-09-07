@@ -31,8 +31,7 @@ class Stack:
     def pop(self):
         if self.size() == 0:
             return None
-        else:
-            return self.stack.pop()
+        return self.stack.pop()
 
     def push(self, value):
         self.stack.append(value)
@@ -40,8 +39,7 @@ class Stack:
     def peek(self):
         if self.size() == 0:
             return None
-        else:
-            return self.stack[self.size() - 1]
+        return self.stack[self.size() - 1]
 
 
 class SimpleGraph:
