@@ -26,6 +26,12 @@ class MyTestCase(unittest.TestCase):
                      '[0, 0, 0]\n'
         self.assertEqual(expected_m, self.m_adjacency_to_str(graph))  # add assertion here
 
+    def test_weak_vertex(self):
+        graph = self.get_graph()
+        actual = graph.WeakVertices()
+        self.assertEqual([], actual)
+
+
     def get_graph(selfs):
         graph = SimpleGraph(10)
         graph.AddVertex(1)

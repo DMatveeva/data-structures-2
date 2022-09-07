@@ -52,6 +52,34 @@ class SimpleGraph:
         self.m_adjacency = [[0] * size for _ in range(size)]
         self.vertex = [None] * size
 
+    def WeakVertices(self):
+
+        strong_vertex = set()
+        i = 0
+        while i < self.max_vertex:
+            # get all neighbours of the vertex
+            neighbours = []
+            j = 0
+            while j < self.max_vertex:
+                if self.m_adjacency[i][j] == 1:
+                    neighbours.append(j)
+                j += 1
+            k = 0
+            # for every neighbour we check if its neighbours are the neighbours of the initial vertex
+            # if so, the initial vertex is strong vertex
+            while k < len(neighbours):
+                m = 0
+                while m < len(neighbours):
+                    if self.m_adjacency[k][m] == 1:
+                        strong_vertex.add(i)
+                    m += 1
+                k += 1
+            i += 1
+
+        all_vertex = set(range(0, self.max_vertex))
+        weak_vertex = all_vertex.difference(strong_vertex)
+        return list(weak_vertex)
+
     def DepthFirstSearch(self, VFrom, VTo):
         for v in self.vertex:
             v.Hit = False
