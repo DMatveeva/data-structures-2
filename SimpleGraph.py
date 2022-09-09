@@ -50,7 +50,7 @@ class SimpleGraph:
         self.vertex = [None] * size
 
     def WeakVertices(self):
-        strong_vertex_indices = set()
+        strong_vertex_indices = []
         i = 0
         while i < self.max_vertex:
             # get all neighbours of the vertex
@@ -65,7 +65,7 @@ class SimpleGraph:
             for k in neighbours:
                 for m in neighbours:
                     if self.m_adjacency[k][m] == 1:
-                        strong_vertex_indices.add(i)
+                        strong_vertex_indices.append(i)
             i += 1
 
         all_vertex_indices = list(range(0, self.max_vertex))
