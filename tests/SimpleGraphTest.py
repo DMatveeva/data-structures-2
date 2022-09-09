@@ -29,7 +29,20 @@ class MyTestCase(unittest.TestCase):
     def test_weak_vertex(self):
         graph = self.get_graph()
         actual = graph.WeakVertices()
-        self.assertEqual([], actual)
+
+        v0 = graph.vertex[0]
+        v1 = graph.vertex[1]
+        v2 = graph.vertex[2]
+        v3 = graph.vertex[3]
+        v4 = graph.vertex[4]
+        v5 = graph.vertex[5]
+        v6 = graph.vertex[6]
+        v7 = graph.vertex[7]
+        v8 = graph.vertex[8]
+        v9 = graph.vertex[9]
+
+        self.assertEqual('1,3,5,6,8,9,10,', self.list_of_vertex_to_str(actual))
+        self.assertEqual([v0, v2, v4, v5, v7, v8, v9], actual)
 
 
     def get_graph(selfs):

@@ -50,7 +50,6 @@ class SimpleGraph:
         self.vertex = [None] * size
 
     def WeakVertices(self):
-
         strong_vertex_indices = set()
         i = 0
         while i < self.max_vertex:
@@ -61,20 +60,16 @@ class SimpleGraph:
                 if self.m_adjacency[i][j] == 1:
                     neighbours.append(j)
                 j += 1
-            k = 0
             # for every neighbour we check if its neighbours are the neighbours of the initial vertex
             # if so, the initial vertex is strong vertex
-            while k < len(neighbours):
-                m = 0
-                while m < len(neighbours):
+            for k in neighbours:
+                for m in neighbours:
                     if self.m_adjacency[k][m] == 1:
                         strong_vertex_indices.add(i)
-                    m += 1
-                k += 1
             i += 1
 
-        all_vertex_indices = set(range(0, self.max_vertex))
-        weak_vertex_indices = all_vertex_indices.difference(strong_vertex_indices)
+        all_vertex_indices = list(range(0, self.max_vertex))
+        weak_vertex_indices = [node for node in all_vertex_indices if node not in strong_vertex_indices]
         weak_vertex = []
         for i in weak_vertex_indices:
             weak_vertex.append(self.vertex[i])
